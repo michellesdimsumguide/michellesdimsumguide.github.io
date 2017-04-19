@@ -1,0 +1,131 @@
+/*
+ * Start Bootstrap - Full Slider (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+html {
+    height: 100%;
+    background-color: #FBCA41;
+}
+
+.hide-overflow {
+    overflow: hidden;
+}
+
+
+body {
+    height: 100%;
+    background-color: transparent;
+}
+
+.carousel,
+.item,
+.active {
+    height: 100%;
+}
+
+.navbar-nav {
+    font-family: "Century Gothic", "sans serif";
+}
+
+/*
+.navbar-nav li a {
+    color: white;
+    text-decoration: none;
+}
+*/
+
+.home-body {
+    background: url(../assets/home-background.png) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.etiquette-body {
+    background: url(../assets/etiquette-background.png) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+}
+.carousel-inner {
+    height: 100%;
+    background-color: #FBCA41;
+}
+
+/* Background images are set within the HTML using inline CSS, not here */
+
+.fill {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+/*
+footer {
+    margin: 50px 0;
+}*/
+
+.sample {
+    display: none;
+}
+
+.canvas {
+    background-color: #FBCA41;
+}
+
+.centerdiv {
+    width: 100%;
+    height: 100%;
+}
+
+.block {
+    background-color:rgba(255,255,255,0.4);
+    height:100%;
+    padding-left:12px;
+    padding-right:12px;
+}
+
+h1 {
+    font-family: "Simply Rounded", "Century Gothic", "sans-serif";
+}
+
+h4 {
+    font-family: "Simply Rounded", "Century Gothic", "sans-serif";
+}
+
+p {
+    font-family: "Century Gothic";
+}
+
+.key1 {
+    position: absolute;
+    z-index: 5;
+    height: 90%;
+    top: 65px;
+    left: 25px;
+}
+
+.key2 {
+    position: absolute;
+    z-index: 5;
+    height: 90%;
+    top: 65px;
+    right: 25px;
+}
+
+.carousel-control.left {
+    z-index:7;
+}  
+.carousel-control.right {
+    z-index:7;
+}
