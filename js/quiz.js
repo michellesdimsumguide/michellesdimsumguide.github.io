@@ -8,6 +8,7 @@ var quizState = 0;
 var images = [];
 var yesImage;
 var noImage;
+var restartImage;
 var fadeAlpha = 0;
 var quizResult = [];
 var tryText = "try";
@@ -37,11 +38,11 @@ function CanvasImage(imageID, position, name) {
 			this.absolutex = canvas.width / 2;
 			this.absolutey = canvas.height / 2 + 150;
 		}
-		/*
+		
 		if(position == 4) {
-			this.absolutex = (canvas.width / 2); 
-			this.absolutey = canvas.height - 175;
-		}
+			this.absolutex = canvas.width - 200; 
+			this.absolutey = canvas.height - 100;
+		}/*
 		if(position == 5) {
 			this.absolutex = canvas.width - 50;
 			this.absolutey = canvas.height / 2 - 10;
@@ -95,8 +96,12 @@ function CanvasImage(imageID, position, name) {
 		}
 	}
 
-	this.clickUpdate = function(x) {
-		if(this.mouseOver && quizState < 7) {
+	this.clickUpdate = function(x, reset) {
+		if(this.mouseOver && reset) {
+			quizState = x;
+			tryText = "try";
+		}
+		else if(this.mouseOver && quizState < 7) {
 			quizResult = [quizState * 2, quizState * 2 + 1];
 			quizState = x;
 			this.mouseOver = false;
@@ -116,18 +121,19 @@ document.addEventListener("click", function(x) {
 
 function clickUpdate() {
 	if(quizState < 7) {
-		yesImage.clickUpdate(7);
+		yesImage.clickUpdate(7, false);
 		if(quizState < 6) {
-			noImage.clickUpdate(quizState + 1);
+			noImage.clickUpdate(quizState + 1, false);
 		}
 		else {
-			noImage.clickUpdate(0)
+			noImage.clickUpdate(0, false)
 		}
 	}
 	else if(quizState = 7) {
-		images[quizResult[0]].clickUpdate();
-		images[quizResult[1]].clickUpdate();
+		images[quizResult[0]].clickUpdate(7, false);
+		images[quizResult[1]].clickUpdate(7, false);
 	}
+	restartImage.clickUpdate(0, true);
 }
 
 document.addEventListener("mousemove", function(e) {
@@ -152,6 +158,7 @@ function handleResize() {
     */
     yesImage.resizeUpdate();
     noImage.resizeUpdate();
+    restartImage.resizeUpdate();
     for(i=0; i<14; i++) {
     	images[i].resizeUpdate();
     }
@@ -175,21 +182,29 @@ function update() {
 		ctx.fillText(questionList[quizState], canvas.width/2, canvas.height/2 - 150);
 		yesImage.mouseOverUpdate();
 		noImage.mouseOverUpdate();
+		restartImage.mouseOverUpdate();
 		ctx.globalAlpha = yesImage.alpha;
 		ctx.drawImage(yesImage.img, yesImage.x, yesImage.y, yesImage.w, yesImage.h);
 		ctx.globalAlpha = fadeAlpha;
 		ctx.globalAlpha = noImage.alpha;
 		ctx.drawImage(noImage.img, noImage.x, noImage.y, noImage.w, noImage.h);
 		ctx.globalAlpha = fadeAlpha;
+		ctx.globalAlpha = restartImage.alpha;
+		ctx.drawImage(restartImage.img, restartImage.x, restartImage.y, restartImage.w, restartImage.h);
+		ctx.globalAlpha = fadeAlpha;
 	}
 	else if(quizState = 7) {
 		images[quizResult[0]].mouseOverUpdate();
 		images[quizResult[1]].mouseOverUpdate();
+		restartImage.mouseOverUpdate();
 		ctx.font = "50px Century Gothic";
 		ctx.textAlign = "center";
 		ctx.fillText(tryText, canvas.width/2, canvas.height/2 - 150);
 		ctx.drawImage(images[quizResult[0]].img, images[quizResult[0]].x, images[quizResult[0]].y, images[quizResult[0]].w, images[quizResult[0]].h)
 		ctx.drawImage(images[quizResult[1]].img, images[quizResult[1]].x, images[quizResult[1]].y, images[quizResult[1]].w, images[quizResult[1]].h)
+		ctx.globalAlpha = restartImage.alpha;
+		ctx.drawImage(restartImage.img, restartImage.x, restartImage.y, restartImage.w, restartImage.h);
+		ctx.globalAlpha = fadeAlpha;
 	}
 
 }
@@ -224,6 +239,7 @@ window.onload = function() {
 
 	yesImage = new CanvasImage("yes", 1);
 	noImage = new CanvasImage("no", 2);
+	restartImage = new CanvasImage("restart", 4)
 	handleResize();
 
 	(function animloop(){
